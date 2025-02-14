@@ -1,0 +1,24 @@
+html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+.header {
+    background-color: rgb(64, 64, 64);
+    display: flex;
+    justify-content: space-between;
+}
+
+i {
+    color: rgb(251, 251, 251);
+    font-size: 22px;
+    padding: 15px;
+}
+
+.score-div {
+    color: rgb(251, 251, 251);
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
