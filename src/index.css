@@ -1,7 +1,13 @@
+:root {
+    --main-bg-color: rgb(244, 244, 244);
+    --secondary-bg-color : white;
+}
+
 html, body {
     margin: 0;
     padding: 0;
-  }
+    background-color: var(--main-bg-color);
+}
 
 .header {
     background-color: rgb(64, 64, 64);
@@ -15,10 +21,41 @@ i {
     padding: 15px;
 }
 
-.score-div {
+.score-container {
     color: rgb(251, 251, 251);
     width: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.quiz-container {
+    background-color: var(--secondary-bg-color);
+    margin: auto;
+    width: 600px;
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.quiz-row {
+    width: 100%;
+    display: flex;
+}
+
+.right {
+    justify-content: end;
+}
+
+.answer-card {
+    width: 50%;
+    border-radius: 8px;
+    border: solid rgb(195, 195, 195) 1px;
+    font-size: 15px;
+    margin: 3px;
+    padding: 8px;
+}
+
+:hover .answer-card {
+    cursor: pointer;
 }

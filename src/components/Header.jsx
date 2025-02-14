@@ -3,7 +3,7 @@ export default function Header() {
         <>
             <div className="header">
                 <i class="fa-solid fa-house"></i>
-                <div className="score-div">
+                <div className="score-container">
                     <p>0/0</p>
                     <p>100%</p>
                 </div>
