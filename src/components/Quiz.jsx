@@ -2,6 +2,16 @@ export default function Quiz() {
     return (
         <>
             <div className="quiz-container">
+                <audio>
+                    <source src="./src/assets/C5.mp3" />
+                </audio>
+                <audio>
+                    <source src="./src/assets/D5.mp3" />
+                </audio>
+                <div className="playback-container">
+                    <i class="fa-solid fa-play"></i>
+                    <div className="playback-line"></div>
+                </div>
                 <div className="quiz-row right">
                     <button className="answer-card">Unison</button>
                 </div>

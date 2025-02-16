@@ -1,5 +1,5 @@
 :root {
-    --main-bg-color: rgb(244, 244, 244);
+    --main-bg-color: rgb(235, 237, 238);
     --secondary-bg-color : white;
 }
 
@@ -7,6 +7,7 @@ html, body {
     margin: 0;
     padding: 0;
     background-color: var(--main-bg-color);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .header {
@@ -15,7 +16,7 @@ html, body {
     justify-content: space-between;
 }
 
-i {
+.header > i {
     color: rgb(251, 251, 251);
     font-size: 22px;
     padding: 15px;
@@ -23,7 +24,7 @@ i {
 
 .score-container {
     color: rgb(251, 251, 251);
-    width: 100px;
+    width: 120px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,10 +33,42 @@ i {
 .quiz-container {
     background-color: var(--secondary-bg-color);
     margin: auto;
-    width: 600px;
+    width: 560px;
     margin-top: 15px;
     border-radius: 8px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.playback-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 30px;
+    margin-bottom: 20px;;
+    background: linear-gradient(to bottom, var(--main-bg-color), white);
+    border-radius: 8px;
+    border: solid rgb(195, 195, 195) 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.playback-container > i {
+    color: black;
+    font-size: 20px;
+}
+
+:hover i {
+    cursor: pointer;
+}
+
+.playback-line {
+    width: 90%;
+    height: 5px;
+    margin-right: 10px;
+    background-color: rgb(181, 181, 181);
 }
 
 .quiz-row {
@@ -50,6 +83,7 @@ i {
 .answer-card {
     width: 50%;
     border-radius: 8px;
+    background: linear-gradient(to top, var(--main-bg-color), white);
     border: solid rgb(195, 195, 195) 1px;
     font-size: 15px;
     margin: 3px;
