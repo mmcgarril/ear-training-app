@@ -1,13 +1,12 @@
-export default function Header() {
+export default function Header(props) {
+const { handleOpenSettings } = props
+
     return (
         <>
             <div className="header">
                 <i class="fa-solid fa-house"></i>
-                <div className="score-container">
-                    <p>0/0</p>
-                    <p>100%</p>
-                </div>
-                <i class="fa-solid fa-gear"></i>
+                    <p>Hear It First</p>
+                <i class="fa-solid fa-gear" onClick={handleOpenSettings}></i>
             </div>
         </>
     )

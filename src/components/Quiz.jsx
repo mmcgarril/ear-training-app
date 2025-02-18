@@ -44,6 +44,11 @@ export default function Quiz() {
                     <button className="answer-card">Octave</button>
                 </div>               
             </div>
+            <div className="score-container">
+                <p>Score:</p>
+                <p>0/0</p>
+                <p>100%</p>
+            </div>
         </>
     )
 }
