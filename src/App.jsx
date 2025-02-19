@@ -45,7 +45,7 @@ function App() {
         </Modal>
       }
       <Header handleOpenModal={handleOpenModal} />
-      <Quiz />
+      <Quiz speedSelection={speedSelection} />
     </>
   )
 }

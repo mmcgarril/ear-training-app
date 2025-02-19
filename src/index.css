@@ -186,9 +186,21 @@ html, body {
     transition: none;
 }
 
-.playing {
+.slow {
     width: 100%;
     transition: width 4s;
+    transition-timing-function: linear;
+}
+
+.medium {
+    width: 100%;
+    transition: width 2s;
+    transition-timing-function: linear;
+}
+
+.fast {
+    width: 100%;
+    transition: width 1s;
     transition-timing-function: linear;
 }
 

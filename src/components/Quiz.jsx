@@ -1,22 +1,35 @@
 import { useState } from 'react'
 import { intervalSources } from '../utils'
 
-export default function Quiz() {
-    const [ clicked, setClicked ] = useState(false)
+export default function Quiz(props) {
+    const { speedSelection } = props
+    const [ isPlaying, setIsPlaying ] = useState(false)
 
     function handlePlayButton() {
-        setClicked(true)
-        setTimeout(() => {
-            setClicked(false)
-        }, 4000)
-        playAudio()
-    }
-
-    function playAudio() {
-        document.getElementById('audio1').play()
-        setTimeout(() => {
-            document.getElementById('audio2').play()
-        }, 2000)
+        if (!isPlaying) {
+            setIsPlaying(true)
+            document.getElementById('audio1').play()
+            setTimeout(() => {
+                document.getElementById('audio1').muted = true
+            }, 2000)
+            setTimeout(() => {
+                document.getElementById('audio2').play()
+            }, 2000)
+            setTimeout(() => {
+                document.getElementById('audio2').muted = true
+            }, 4000)
+            //reset muted to false after total playing time plus some extra
+            setTimeout(() => {
+                document.getElementById('audio1').muted = false
+            }, 4000)
+            setTimeout(() => {
+                document.getElementById('audio2').muted = false
+            }, 4000)
+            //reset isPlaying to false after enough time passed
+            setTimeout(() => {
+                setIsPlaying(false)
+            }, 4000)
+        }
     }
 
     return (
@@ -31,7 +44,7 @@ export default function Quiz() {
                 <div className="playback-container">
                     <i className="fa-solid fa-play" onClick={handlePlayButton}></i>
                     <div className="playback-line">
-                        <div className={`playback-active-line ${clicked ? 'playing disable' : ''}`} />
+                        <div className={`playback-active-line ${isPlaying ? speedSelection : ''}`} />
                     </div>
                 </div>
                 <div className="quiz-row right">

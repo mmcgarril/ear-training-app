@@ -20,6 +20,15 @@ export default function SpeedMenu(props) {
                     </div>
                 </div>
                 <div className="separator" />
+                <div className="setting-button" onClick={() => {setSpeedSelection('medium')}}>
+                    <p>Medium</p>
+                    <div>
+                    {speedSelection == 'medium' &&
+                            <i className="fa-solid fa-check blue"></i>
+                        }
+                    </div>
+                </div>
+                <div className="separator" />
                 <div className="setting-button" onClick={() => {setSpeedSelection('fast')}}>
                     <p>Fast</p>
                     <div>
