@@ -188,19 +188,25 @@ html, body {
 
 .slow {
     width: 100%;
-    transition: width 4s;
+    transition: width 2s;
     transition-timing-function: linear;
 }
 
 .medium {
     width: 100%;
-    transition: width 2s;
+    transition: width 1s;
     transition-timing-function: linear;
 }
 
 .fast {
     width: 100%;
-    transition: width 1s;
+    transition: width 0.5s;
+    transition-timing-function: linear;
+}
+
+.lightning {
+    width: 100%;
+    transition: width 0.25s;
     transition-timing-function: linear;
 }
 

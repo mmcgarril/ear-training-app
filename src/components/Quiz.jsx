@@ -5,41 +5,51 @@ export default function Quiz(props) {
     const { speedSelection } = props
     const [ isPlaying, setIsPlaying ] = useState(false)
 
+    const clipDuration = {
+        slow: 1000,
+        medium: 500,
+        fast: 250,
+        lightning: 125
+    }
+
+    
     function handlePlayButton() {
+        const audioPlayer1 = document.getElementById('audio1')
+        const audioPlayer2 = document.getElementById('audio2')
+        
         if (!isPlaying) {
             setIsPlaying(true)
-            document.getElementById('audio1').play()
+            //play audio1
+            audioPlayer1.play()
+            //pause and reset audio1 to 0 after clip duration
             setTimeout(() => {
-                document.getElementById('audio1').muted = true
-            }, 2000)
+                audioPlayer1.pause()
+                audioPlayer1.currentTime = 0
+            }, clipDuration[speedSelection])
+            //play audio2 after clip duration
             setTimeout(() => {
-                document.getElementById('audio2').play()
-            }, 2000)
+                audioPlayer2.play()
+            }, clipDuration[speedSelection])
+            //pause and reset audio2 to 0 after twice the clip duration
             setTimeout(() => {
-                document.getElementById('audio2').muted = true
-            }, 4000)
-            //reset muted to false after total playing time plus some extra
-            setTimeout(() => {
-                document.getElementById('audio1').muted = false
-            }, 4000)
-            setTimeout(() => {
-                document.getElementById('audio2').muted = false
-            }, 4000)
-            //reset isPlaying to false after enough time passed
+                audioPlayer2.pause()
+                audioPlayer2.currentTime = 0
+            }, (clipDuration[speedSelection] * 2))
+            //reset isPlaying to false after twice the clip duration
             setTimeout(() => {
                 setIsPlaying(false)
-            }, 4000)
+            }, (clipDuration[speedSelection] * 2))
         }
     }
 
     return (
         <>
             <div className="quiz-container">
-                <audio id="audio1" controls>
+                <audio id="audio1">
                     <source src={intervalSources[0]} />
                 </audio>
-                <audio id="audio2" controls>
-                    <source src="./src/assets/D5.mp3" />
+                <audio id="audio2">
+                    <source src={intervalSources[1]} />
                 </audio>
                 <div className="playback-container">
                     <i className="fa-solid fa-play" onClick={handlePlayButton}></i>
