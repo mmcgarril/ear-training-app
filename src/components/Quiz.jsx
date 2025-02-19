@@ -1,16 +1,38 @@
+import { useState } from 'react'
+import { intervalSources } from '../utils'
+
 export default function Quiz() {
+    const [ clicked, setClicked ] = useState(false)
+
+    function handlePlayButton() {
+        setClicked(true)
+        setTimeout(() => {
+            setClicked(false)
+        }, 4000)
+        playAudio()
+    }
+
+    function playAudio() {
+        document.getElementById('audio1').play()
+        setTimeout(() => {
+            document.getElementById('audio2').play()
+        }, 2000)
+    }
+
     return (
         <>
             <div className="quiz-container">
-                <audio>
-                    <source src="./src/assets/C5.mp3" />
+                <audio id="audio1" controls>
+                    <source src={intervalSources[0]} />
                 </audio>
-                <audio>
+                <audio id="audio2" controls>
                     <source src="./src/assets/D5.mp3" />
                 </audio>
                 <div className="playback-container">
-                    <i class="fa-solid fa-play"></i>
-                    <div className="playback-line"></div>
+                    <i className="fa-solid fa-play" onClick={handlePlayButton}></i>
+                    <div className="playback-line">
+                        <div className={`playback-active-line ${clicked ? 'playing disable' : ''}`} />
+                    </div>
                 </div>
                 <div className="quiz-row right">
                     <button className="answer-card">Unison</button>

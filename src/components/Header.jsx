@@ -1,12 +1,12 @@
 export default function Header(props) {
-const { handleOpenSettings } = props
+const { handleOpenModal } = props
 
     return (
         <>
             <div className="header">
-                <i class="fa-solid fa-house"></i>
+                <i className="fa-solid fa-house"></i>
                     <p>Hear It First</p>
-                <i class="fa-solid fa-gear" onClick={handleOpenSettings}></i>
+                <i className="fa-solid fa-gear" onClick={handleOpenModal}></i>
             </div>
         </>
     )
