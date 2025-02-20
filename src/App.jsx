@@ -9,7 +9,8 @@ import IntervalMenu from "./components/IntervalMenu"
 function App() {
   const [ showModal, setShowModal ] = useState(false) 
   const [ showSettings, setShowSettings ] = useState(true)
-  const [ showIntervalMenu, setShowIntervalMenu ] = useState(false) 
+  const [ showIntervalMenu, setShowIntervalMenu ] = useState(false)
+  const [ selectedIntervals, setSelectedIntervals ] = useState(['seconds'])
   const [ showSpeedMenu, setShowSpeedMenu ] = useState(false)
   const [ speedSelection, setSpeedSelection ] = useState('slow')
 
@@ -51,7 +52,9 @@ function App() {
             handleOpenIntervalMenu={handleOpenIntervalMenu} />
           }
           {showIntervalMenu &&
-            <IntervalMenu handleCloseIntervalMenu={handleCloseIntervaldMenu} />
+            <IntervalMenu handleCloseIntervalMenu={handleCloseIntervaldMenu}
+              selectedIntervals={selectedIntervals}
+              setSelectedIntervals={setSelectedIntervals} />
           }
           {showSpeedMenu &&
             <SpeedMenu
@@ -62,7 +65,9 @@ function App() {
         </Modal>
       }
       <Header handleOpenModal={handleOpenModal} />
-      <Quiz speedSelection={speedSelection} />
+      <Quiz selectedIntervals={selectedIntervals}
+        setSelectedIntervals={setSelectedIntervals}
+        speedSelection={speedSelection} />
     </>
   )
 }

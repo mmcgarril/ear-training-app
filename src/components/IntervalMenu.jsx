@@ -2,8 +2,7 @@ import { useState } from "react"
 import IntervalSelect from "./IntervalSelect"
 
 export default function IntervalMenu(props) {
-    const { handleCloseIntervalMenu } = props
-    const [ selectedIntervals, setSelectedIntervals ] = useState(['unison'])
+    const { handleCloseIntervalMenu, selectedIntervals, setSelectedIntervals } = props
     
     return (
         <div className="settings-container">

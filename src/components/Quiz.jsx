@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { intervalSources } from '../utils'
 
 export default function Quiz(props) {
-    const { speedSelection } = props
+    const { selectedIntevals, setSelectedIntervals, speedSelection } = props
     const [ isPlaying, setIsPlaying ] = useState(false)
 
     const clipDuration = {
