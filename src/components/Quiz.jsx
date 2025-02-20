@@ -57,7 +57,7 @@ export default function Quiz(props) {
                         <div className={`playback-active-line ${isPlaying ? speedSelection : ''}`} />
                     </div>
                 </div>
-                <div className="quiz-row right">
+                <div className="quiz-row">
                     <button className="answer-card">Unison</button>
                 </div>
                 <div className="quiz-row">
