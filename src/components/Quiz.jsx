@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { intervalSources } from '../utils'
+import { createRandomInterval, intervalSources } from '../utils'
 
 export default function Quiz(props) {
-    const { selectedIntevals, setSelectedIntervals, speedSelection } = props
+    const { selectedIntervals, speedSelection } = props
     const [ isPlaying, setIsPlaying ] = useState(false)
 
     const clipDuration = {
@@ -11,7 +11,8 @@ export default function Quiz(props) {
         fast: 250,
         lightning: 125
     }
-
+    
+    const intervalPair = createRandomInterval(selectedIntervals)
     
     function handlePlayButton() {
         const audioPlayer1 = document.getElementById('audio1')
@@ -46,10 +47,10 @@ export default function Quiz(props) {
         <>
             <div className="quiz-container">
                 <audio id="audio1">
-                    <source src={intervalSources[0]} />
+                    <source src={intervalSources[intervalPair[0]]} />
                 </audio>
                 <audio id="audio2">
-                    <source src={intervalSources[1]} />
+                    <source src={intervalSources[intervalPair[1]]} />
                 </audio>
                 <div className="playback-container">
                     <i className="fa-solid fa-play" onClick={handlePlayButton}></i>

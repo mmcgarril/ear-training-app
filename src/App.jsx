@@ -65,9 +65,7 @@ function App() {
         </Modal>
       }
       <Header handleOpenModal={handleOpenModal} />
-      <Quiz selectedIntervals={selectedIntervals}
-        setSelectedIntervals={setSelectedIntervals}
-        speedSelection={speedSelection} />
+      <Quiz selectedIntervals={selectedIntervals} speedSelection={speedSelection} />
     </>
   )
 }
