@@ -1,25 +1,19 @@
-import { useState } from 'react'
-import { createRandomInterval, intervalSources } from '../utils'
+import { useEffect, useState } from 'react'
+import { clipDuration, createIntervalAnswer, intervalSources } from '../utils'
 
 export default function Quiz(props) {
-    const { selectedIntervals, speedSelection } = props
+    const { selectedIntervals, setSelectedIntervals, speedSelection } = props
     const [ isPlaying, setIsPlaying ] = useState(false)
+    const [ randomInt, setRandomInt ] = useState(null) 
 
-    const clipDuration = {
-        slow: 1000,
-        medium: 500,
-        fast: 250,
-        lightning: 125
-    }
-    
-    const intervalPair = createRandomInterval(selectedIntervals)
-    
     function handlePlayButton() {
         const audioPlayer1 = document.getElementById('audio1')
         const audioPlayer2 = document.getElementById('audio2')
         
         if (!isPlaying) {
             setIsPlaying(true)
+            audioPlayer1.load()
+            audioPlayer2.load()
             //play audio1
             audioPlayer1.play()
             //pause and reset audio1 to 0 after clip duration
@@ -36,21 +30,36 @@ export default function Quiz(props) {
                 audioPlayer2.pause()
                 audioPlayer2.currentTime = 0
             }, (clipDuration[speedSelection] * 2))
-            //reset isPlaying to false after twice the clip duration
+            //reset isPlaying to false after twice the clip duration, plus buffer time to avoid play/pause err
             setTimeout(() => {
                 setIsPlaying(false)
-            }, (clipDuration[speedSelection] * 2))
+            }, (clipDuration[speedSelection] * 2 + 20))
         }
     }
+
+    function generateRandomInt() {
+        setRandomInt(createIntervalAnswer(selectedIntervals))
+    }
+
+    //initialze interval groups to all on page load
+    useEffect(() => {
+        setSelectedIntervals(['unison', 'seconds', 'thirds', 'fourths', 'sixths', 'sevenths'])
+    }, [])
+
+    //listen for changes to selectedIntervals, create new answer
+    useEffect(() => {
+        generateRandomInt()
+    }, [selectedIntervals])
 
     return (
         <>
             <div className="quiz-container">
-                <audio id="audio1">
-                    <source src={intervalSources[intervalPair[0]]} />
+                <audio id="audio1" key="1" controls>
+                    <source src={intervalSources[0]} />
                 </audio>
-                <audio id="audio2">
-                    <source src={intervalSources[intervalPair[1]]} />
+                {/* NEED A KEY PROPERTY IN ORDER FOR AUDIO SRC TO UPDATE!! */}
+                <audio id="audio2" key="2" controls>
+                    <source src={intervalSources[randomInt]} />
                 </audio>
                 <div className="playback-container">
                     <i className="fa-solid fa-play" onClick={handlePlayButton}></i>
@@ -58,6 +67,7 @@ export default function Quiz(props) {
                         <div className={`playback-active-line ${isPlaying ? speedSelection : ''}`} />
                     </div>
                 </div>
+                <div>Answer: {randomInt}</div>
                 <div className="quiz-row">
                     <button className="answer-card">Unison</button>
                 </div>

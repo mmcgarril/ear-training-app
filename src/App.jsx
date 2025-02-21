@@ -10,11 +10,18 @@ function App() {
   const [ showModal, setShowModal ] = useState(false) 
   const [ showSettings, setShowSettings ] = useState(true)
   const [ showIntervalMenu, setShowIntervalMenu ] = useState(false)
-  const [ selectedIntervals, setSelectedIntervals ] = useState(['seconds'])
+  const [ selectedIntervals, setSelectedIntervals ] = useState([])
   const [ showSpeedMenu, setShowSpeedMenu ] = useState(false)
   const [ speedSelection, setSpeedSelection ] = useState('slow')
 
   function handleCloseModal() {
+    //guard clause to remind user not to leave selected groups empty, leave modal open and set to interval menu
+    if (selectedIntervals.length == 0) {
+      handleCloseSpeedMenu()
+      handleOpenIntervalMenu()
+      alert('Select at least one interval group')
+      return
+    }
     setShowModal(false)
   }
 
@@ -65,7 +72,10 @@ function App() {
         </Modal>
       }
       <Header handleOpenModal={handleOpenModal} />
-      <Quiz selectedIntervals={selectedIntervals} speedSelection={speedSelection} />
+      <Quiz selectedIntervals={selectedIntervals}
+        setSelectedIntervals={setSelectedIntervals}
+        speedSelection={speedSelection}
+         />
     </>
   )
 }

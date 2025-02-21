@@ -1,12 +1,27 @@
 export const intervalSources = [
+    './src/assets/A4.wav',
+    './src/assets/Bb4.wav',
+    './src/assets/B4.wav',
+    './src/assets/C4.wav',
+    './src/assets/Db4.wav',
+    './src/assets/D4.wav',
+    './src/assets/Eb4.wav',
+    './src/assets/E4.wav',
+    './src/assets/F4.wav',
+    './src/assets/F#4.wav',
+    './src/assets/G4.wav',
+    './src/assets/Ab5.wav',
+    './src/assets/A5.wav',
+    './src/assets/Bb5.wav',
+    './src/assets/B5.wav',
     './src/assets/C5.wav',
     './src/assets/Db5.wav',
     './src/assets/D5.wav',
 ]
 
-export function createRandomInterval(selectedIntGroups) {
+export function createIntervalAnswer(selectedIntGroups) {
     const possibleIndexDistance = []
-    if ((selectedIntGroups || []).includes('unision')) {
+    if ((selectedIntGroups || []).includes('unison')) {
         possibleIndexDistance.push(0, 12)
     }
     if ((selectedIntGroups || []).includes('seconds')) {
@@ -24,10 +39,13 @@ export function createRandomInterval(selectedIntGroups) {
     if ((selectedIntGroups || []).includes('sevenths')) {
         possibleIndexDistance.push(10, 11)
     }
-    const endingPitchDistance = possibleIndexDistance[Math.floor(Math.random() * possibleIndexDistance.length)]
+    
+    return possibleIndexDistance[Math.floor(Math.random() * possibleIndexDistance.length)]
+}
 
-    const startingPitchIndex = 0
-    const endingPitchIndex = startingPitchIndex + endingPitchDistance
-
-    return [startingPitchIndex, endingPitchIndex]
+export const clipDuration = {
+    slow: 1000,
+    medium: 500,
+    fast: 250,
+    lightning: 125
 }
