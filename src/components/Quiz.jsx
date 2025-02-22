@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
-import { clipDuration, createIntervalAnswer, intervalSources } from '../utils'
+import { clipDuration, createPossibleAnswers, getNewStartingPitch, intervalSources } from '../utils'
 
 export default function Quiz(props) {
     const { selectedIntervals, setSelectedIntervals, speedSelection } = props
     const [ isPlaying, setIsPlaying ] = useState(false)
-    const [ randomInt, setRandomInt ] = useState(null) 
+    const [ possibleAnswers, setPossibleAnswers ] = useState([])
+    const [ intAnswer, setIntAnswer ] = useState(null) 
+    const [ startingPitch, setStartingPitch ] = useState(null)
+    const [ endingPitch, setEndingPitch ] = useState(null)
 
     function handlePlayButton() {
         const audioPlayer1 = document.getElementById('audio1')
@@ -37,8 +40,20 @@ export default function Quiz(props) {
         }
     }
 
-    function generateRandomInt() {
-        setRandomInt(createIntervalAnswer(selectedIntervals))
+    function generateNewStartingPitch() {
+        const newStartPitch = Math.floor(Math.random() * intervalSources.length)
+        setStartingPitch(newStartPitch)
+    }
+
+    function generateNewAnswer() {
+        console.log('selected ints: ', selectedIntervals)
+        const possibleAnsArray = createPossibleAnswers(selectedIntervals)
+        setPossibleAnswers(possibleAnsArray)
+        console.log('possible answers: ', possibleAnswers)
+        const randomIndex = Math.floor(Math.random() * possibleAnsArray.length)
+        const answer = possibleAnsArray[randomIndex]
+        console.log('answer: ', answer)
+        setIntAnswer(answer)
     }
 
     //initialze interval groups to all on page load
@@ -46,20 +61,30 @@ export default function Quiz(props) {
         setSelectedIntervals(['unison', 'seconds', 'thirds', 'fourths', 'sixths', 'sevenths'])
     }, [])
 
-    //listen for changes to selectedIntervals, create new answer
+    //listen for changes to interval groups, create new answer
     useEffect(() => {
-        generateRandomInt()
+        generateNewStartingPitch()
+        generateNewAnswer()
     }, [selectedIntervals])
+
+    useEffect(() => {
+        if ((startingPitch + intAnswer) > (intervalSources.length - 1)) {
+            generateNewStartingPitch()
+            generateNewAnswer()
+        } else {
+            setEndingPitch((startingPitch + intAnswer))
+        }
+    }, [intAnswer])
 
     return (
         <>
             <div className="quiz-container">
                 <audio id="audio1" key="1" controls>
-                    <source src={intervalSources[0]} />
+                    <source src={intervalSources[startingPitch]} />
                 </audio>
                 {/* NEED A KEY PROPERTY IN ORDER FOR AUDIO SRC TO UPDATE!! */}
                 <audio id="audio2" key="2" controls>
-                    <source src={intervalSources[randomInt]} />
+                    <source src={intervalSources[endingPitch]} />
                 </audio>
                 <div className="playback-container">
                     <i className="fa-solid fa-play" onClick={handlePlayButton}></i>
@@ -67,8 +92,8 @@ export default function Quiz(props) {
                         <div className={`playback-active-line ${isPlaying ? speedSelection : ''}`} />
                     </div>
                 </div>
-                <div>Answer: {randomInt}</div>
-                <div className="quiz-row">
+                <div>Start: {startingPitch} End: {endingPitch} Answer: {intAnswer}</div>
+                <div className="quiz-row right">
                     <button className="answer-card">Unison</button>
                 </div>
                 <div className="quiz-row">
@@ -84,8 +109,6 @@ export default function Quiz(props) {
                 </div>
                 <div className="quiz-row">
                     <button className="answer-card">Tritone</button>
-                </div>
-                <div className="quiz-row right">
                     <button className="answer-card">Perfect 5th</button>
                 </div>
                 <div className="quiz-row">

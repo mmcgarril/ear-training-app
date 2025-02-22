@@ -17,9 +17,23 @@ export const intervalSources = [
     './src/assets/C5.wav',
     './src/assets/Db5.wav',
     './src/assets/D5.wav',
+    './src/assets/Eb5.wav',
+    './src/assets/E5.wav',
+    './src/assets/F5.wav',
+    './src/assets/F#5.wav',
+    './src/assets/G5.wav',
+    './src/assets/Ab6.wav',
+    './src/assets/A6.wav',
+    './src/assets/Bb6.wav',
+    './src/assets/B6.wav',
+    './src/assets/C6.wav',
 ]
 
-export function createIntervalAnswer(selectedIntGroups) {
+export function getNewStartingPitch() {
+    return Math.floor(Math.random() * (intervalSources.length - 1))
+}
+
+export function createPossibleAnswers(selectedIntGroups) {
     const possibleIndexDistance = []
     if ((selectedIntGroups || []).includes('unison')) {
         possibleIndexDistance.push(0, 12)
@@ -40,7 +54,7 @@ export function createIntervalAnswer(selectedIntGroups) {
         possibleIndexDistance.push(10, 11)
     }
     
-    return possibleIndexDistance[Math.floor(Math.random() * possibleIndexDistance.length)]
+    return possibleIndexDistance
 }
 
 export const clipDuration = {
