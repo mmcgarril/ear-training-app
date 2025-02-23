@@ -29,6 +29,22 @@ export const intervalSources = [
     './src/assets/C6.wav',
 ]
 
+export const intervalInfo = {
+    0: {title: 'Unison', group: 'unison'},
+    1: {title: 'Minor 2nd', group: 'seconds'},
+    2: {title: 'Major 2nd', group: 'seconds'},
+    3: {title: 'Minor 3rd', group: 'thirds'},
+    4: {title: 'Major 3rd', group: 'thirds'},
+    5: {title: 'Perfect 4th', group: 'fourths'},
+    6: {title: 'Tritone', group: 'fourths'},
+    7: {title: 'Perfect 5th', group: 'fourths'},
+    8: {title: 'Minor 6th', group: 'sixths'},
+    9: {title: 'Major 6th', group: 'sixths'},
+    10: {title: 'Minor 7th', group: 'sevenths'},
+    11: {title: 'Major 7th', group: 'sevenths'},
+    12: {title: 'Octave', group: 'unison'},
+}
+
 export function createPossibleAnswers(selectedIntGroups) {
     const possibleIndexDistance = []
     if ((selectedIntGroups || []).includes('unison')) {

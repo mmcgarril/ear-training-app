@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react"
+import { intervalInfo } from "../utils"
 
 export function AnswerButton(props) {
-    const { title, value, right, selectedIntervals, intervalGroup, intAnswer, handleGuess, clickedAnsButtons} = props
+    const {value, selectedIntervals, intAnswer, handleGuess, clickedAnsButtons} = props
+
+    const info = intervalInfo[value]
+
+    const rightAlignInts = [0, 5, 12]
+
+    const disabled = !selectedIntervals.includes(info.group)
+    const clicked = clickedAnsButtons.includes(value)
 
     return (
         <>
-            <button className={`answer-card ${!selectedIntervals.includes(intervalGroup) ? 'disabled empty' : ''}
-                ${clickedAnsButtons.includes(value) ? 'red-button' : 'grey-button'}
-                ${right}`} value={value} onClick={() => handleGuess(value)}>{title}</button>
+            <button className={`answer-card ${!clickedAnsButtons.includes(value) ? 'grey-button' : intAnswer == value ? 'green-button' : 'red-button'} 
+                ${rightAlignInts.includes(value) ? 'right' : ''} ${disabled || clicked ? '' : 'active-button'}`} 
+                disabled={disabled || clicked}
+                value={value} onClick={() => handleGuess(value)}>{info.title}</button>
         </>
     )
 }

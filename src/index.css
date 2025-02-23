@@ -154,7 +154,7 @@ html, body {
     width: 100%;
     box-sizing: border-box;
     padding: 30px;
-    margin-bottom: 20px;;
+    margin-bottom: 10px;;
     background: linear-gradient(to bottom, var(--main-bg-color), white);
     border-radius: 8px;
     border: solid rgb(195, 195, 195) 1px;
@@ -228,9 +228,13 @@ html, body {
     padding: 8px;
 }
 
-:hover .answer-card {
+.active-button:hover  {
     cursor: pointer;
 }
+
+/* .disabled:hover {
+    cursor: default;
+} */
 
 .empty {
     background: white;
@@ -247,11 +251,15 @@ html, body {
 }
 
 .green-button {
-    background: linear-gradient(to top, rgb(79, 189, 79), rgb(145, 189, 145));
-    border: solid rgb(112, 186, 112) 1px;
+    background: linear-gradient(to top, rgb(122, 231, 122), rgb(196, 229, 196));
+    border: solid rgb(150, 193, 150) 1px;
 }
 
 .red-button {
     background: linear-gradient(to top, rgb(255, 114, 114), rgb(255, 193, 193));
     border: solid rgb(255, 144, 144) 1px;
+}
+
+.correct-box {
+    height: 24px;
 }
