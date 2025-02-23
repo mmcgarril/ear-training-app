@@ -29,10 +29,6 @@ export const intervalSources = [
     './src/assets/C6.wav',
 ]
 
-export function getNewStartingPitch() {
-    return Math.floor(Math.random() * (intervalSources.length - 1))
-}
-
 export function createPossibleAnswers(selectedIntGroups) {
     const possibleIndexDistance = []
     if ((selectedIntGroups || []).includes('unison')) {

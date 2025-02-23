@@ -220,10 +220,9 @@ html, body {
 }
 
 .answer-card {
-    width: 50%;
+    width: 49%;
+    height: 40px;
     border-radius: 8px;
-    background: linear-gradient(to top, var(--main-bg-color), white);
-    border: solid rgb(195, 195, 195) 1px;
     font-size: 15px;
     margin: 3px;
     padding: 8px;
@@ -231,4 +230,28 @@ html, body {
 
 :hover .answer-card {
     cursor: pointer;
+}
+
+.empty {
+    background: white;
+    color: white;
+}
+
+.empty:hover {
+    cursor: auto;
+}
+
+.grey-button {
+    background: linear-gradient(to top, var(--main-bg-color), white);
+    border: solid rgb(235, 235, 235) 1px;
+}
+
+.green-button {
+    background: linear-gradient(to top, rgb(79, 189, 79), rgb(145, 189, 145));
+    border: solid rgb(112, 186, 112) 1px;
+}
+
+.red-button {
+    background: linear-gradient(to top, rgb(255, 114, 114), rgb(255, 193, 193));
+    border: solid rgb(255, 144, 144) 1px;
 }
