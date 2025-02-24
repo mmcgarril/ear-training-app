@@ -15,6 +15,7 @@ export default function Quiz(props) {
     const [ isCorrect, setIsCorrect ] = useState(false)
 
     function handlePlayButton() {
+        if (isCorrect) { return }
         const audioPlayer1 = document.getElementById('audio1')
         const audioPlayer2 = document.getElementById('audio2')
         
@@ -28,20 +29,20 @@ export default function Quiz(props) {
             setTimeout(() => {
                 audioPlayer1.pause()
                 audioPlayer1.currentTime = 0
-            }, clipDuration[speedSelection])
+            }, clipDuration[speedSelection] + 20)
             //play audio2 after clip duration
             setTimeout(() => {
                 audioPlayer2.play()
-            }, clipDuration[speedSelection])
+            }, clipDuration[speedSelection] + 20)
             //pause and reset audio2 to 0 after twice the clip duration
             setTimeout(() => {
                 audioPlayer2.pause()
                 audioPlayer2.currentTime = 0
-            }, (clipDuration[speedSelection] * 2))
+            }, (clipDuration[speedSelection] * 2) + 40)
             //reset isPlaying to false after twice the clip duration, plus buffer time to avoid play/pause err
             setTimeout(() => {
                 setIsPlaying(false)
-            }, (clipDuration[speedSelection] * 2 + 20))
+            }, (clipDuration[speedSelection] * 2 + 40))
         }
     }
 
@@ -61,7 +62,6 @@ export default function Quiz(props) {
     function handleGuess(btnValue) {
         const prevTotalCount = guessesTotal
         setGuessesTotal(prevTotalCount + 1)
-        
         setClickedAnsButtons([...clickedAnsButtons, btnValue])
 
         if (btnValue == intAnswer) {
@@ -72,9 +72,8 @@ export default function Quiz(props) {
             setTimeout(() => {
                 setIsCorrect(false)
                 setClickedAnsButtons([])
-                generateNewStartingPitch()
-                generateNewAnswer()
-            }, 2000)
+                setSelectedIntervals([...selectedIntervals])
+            }, 1000)
         } else {
             
         }
@@ -127,89 +126,77 @@ export default function Quiz(props) {
                         clickedAnsButtons={clickedAnsButtons} />
                 </div>
                 <div className="quiz-row">
-                    <AnswerButton title={'Minor 2nd'} value={1} right={''}
+                    <AnswerButton value={1}
                         selectedIntervals={selectedIntervals}
-                        intervalGroup={'seconds'}
                         intAnswer={intAnswer}
                         handleGuess={handleGuess}
                         clickedAnsButtons={clickedAnsButtons} />
                     {/* <button value="1" className="answer-card" onClick={handleGuess}>Minor 2nd</button> */}
-                    <AnswerButton title={'Major 2nd'} value={2} right={''}
+                    <AnswerButton value={2}
                         selectedIntervals={selectedIntervals}
-                        intervalGroup={'seconds'}
                         intAnswer={intAnswer}
                         handleGuess={handleGuess}
                         clickedAnsButtons={clickedAnsButtons} />
                     {/* <button className="answer-card">Major 2nd</button> */}
                 </div>
                 <div className="quiz-row">
-                    <AnswerButton title={'Minor 3rd'} value={3} right={''}
+                    <AnswerButton value={3}
                         selectedIntervals={selectedIntervals}
-                        intervalGroup={'thirds'}
                         intAnswer={intAnswer}
                         handleGuess={handleGuess}
                         clickedAnsButtons={clickedAnsButtons} />
-                    <AnswerButton title={'Major 3rd'} value={4} right={''}
+                    <AnswerButton value={4}
                         selectedIntervals={selectedIntervals}
-                        intervalGroup={'thirds'}
                         intAnswer={intAnswer}
                         handleGuess={handleGuess}
                         clickedAnsButtons={clickedAnsButtons} />
                 </div>
                 <div className="quiz-row right">
-                    <AnswerButton title={'Perfect 4th'} value={5} right={'right'}
+                    <AnswerButton value={5}
                         selectedIntervals={selectedIntervals}
-                        intervalGroup={'fourths'}
                         intAnswer={intAnswer}
                         handleGuess={handleGuess}
                         clickedAnsButtons={clickedAnsButtons} />
                 </div>
                 <div className="quiz-row">
-                    <AnswerButton title={'Tritone'} value={6} right={''}
+                    <AnswerButton value={6}
                         selectedIntervals={selectedIntervals}
-                        intervalGroup={'fourths'}
                         intAnswer={intAnswer}
                         handleGuess={handleGuess}
                         clickedAnsButtons={clickedAnsButtons} />
-                    <AnswerButton title={'Perfect 5th'} value={7} right={''}
+                    <AnswerButton value={7}
                         selectedIntervals={selectedIntervals}
-                        intervalGroup={'fourths'}
                         intAnswer={intAnswer}
                         handleGuess={handleGuess}
                         clickedAnsButtons={clickedAnsButtons} />
                 </div>
                 <div className="quiz-row">
-                    <AnswerButton title={'Minor 6th'} value={8} right={''}
+                    <AnswerButton value={8}
                         selectedIntervals={selectedIntervals}
-                        intervalGroup={'sixths'}
                         intAnswer={intAnswer}
                         handleGuess={handleGuess}
                         clickedAnsButtons={clickedAnsButtons} />
-                    <AnswerButton title={'Major 6th'} value={9} right={''}
+                    <AnswerButton value={9}
                         selectedIntervals={selectedIntervals}
-                        intervalGroup={'sixths'}
                         intAnswer={intAnswer}
                         handleGuess={handleGuess}
                         clickedAnsButtons={clickedAnsButtons} />
                 </div>     
                 <div className="quiz-row">
-                    <AnswerButton title={'Minor 7th'} value={10} right={''}
+                    <AnswerButton value={10}
                         selectedIntervals={selectedIntervals}
-                        intervalGroup={'sevenths'}
                         intAnswer={intAnswer}
                         handleGuess={handleGuess}
                         clickedAnsButtons={clickedAnsButtons} />
-                    <AnswerButton title={'Major 6th'} value={11} right={''}
+                    <AnswerButton value={11}
                         selectedIntervals={selectedIntervals}
-                        intervalGroup={'sevenths'}
                         intAnswer={intAnswer}
                         handleGuess={handleGuess}
                         clickedAnsButtons={clickedAnsButtons} />
                 </div>  
                 <div className="quiz-row right">
-                    <AnswerButton title={'Octave'} value={12} right={'right'}
+                    <AnswerButton value={12}
                         selectedIntervals={selectedIntervals}
-                        intervalGroup={'unison'}
                         intAnswer={intAnswer}
                         handleGuess={handleGuess}
                         clickedAnsButtons={clickedAnsButtons} />
