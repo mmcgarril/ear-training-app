@@ -1,5 +1,13 @@
+import { useState } from "react"
+
 export default function SettingsMenu(props) {
-    const { handleOpenSpeedMenu, handleOpenIntervalMenu } = props
+    const { handleOpenSpeedMenu, handleOpenIntervalMenu, handleResetScore} = props
+    const [ isResetShowing, setIsResetShowing ] = useState(false)
+
+    function handleClick() {
+        setIsResetShowing(!isResetShowing)
+    }
+
     return (
         <div className="settings-container">
             <div className="settings-header">
@@ -19,6 +27,14 @@ export default function SettingsMenu(props) {
                         <i className="fa-solid fa-angle-right"></i>
                     </div>
                 </div>
+            </div>
+            <div className="setting-group">
+                <div id="reset-score-button" className="setting-button" onClick={handleClick}>
+                    <p>Reset Score</p>
+                    <i className={`fa-solid fa-eraser ${!isResetShowing ? '' : ''}`}></i>
+                    <div className={`reset ${isResetShowing ? 'slide-left' : ''}`} onClick={handleResetScore}>Reset</div>
+                </div>
+                
             </div>
         </div>
 

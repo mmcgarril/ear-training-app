@@ -13,6 +13,8 @@ function App() {
   const [ selectedIntervals, setSelectedIntervals ] = useState([])
   const [ showSpeedMenu, setShowSpeedMenu ] = useState(false)
   const [ speedSelection, setSpeedSelection ] = useState('medium')
+  const [ guessesCorrect, setGuessesCorrect ] = useState(0)
+  const [ guessesTotal, setGuessesTotal ] = useState(0)
 
   function handleCloseModal() {
     //guard clause to remind user not to leave selected groups empty, leave modal open and set to interval menu
@@ -49,6 +51,12 @@ function App() {
     setShowSpeedMenu(true)
   }
 
+  function handleResetScore() {
+    setGuessesCorrect(0)
+    setGuessesTotal(0)
+    handleCloseModal()
+  }
+
   return (
     <>
       {showModal && 
@@ -56,7 +64,8 @@ function App() {
           {showSettings &&
             <SettingsMenu title="Settings"
             handleOpenSpeedMenu={handleOpenSpeedMenu}
-            handleOpenIntervalMenu={handleOpenIntervalMenu} />
+            handleOpenIntervalMenu={handleOpenIntervalMenu} 
+            handleResetScore={handleResetScore} />
           }
           {showIntervalMenu &&
             <IntervalMenu handleCloseIntervalMenu={handleCloseIntervaldMenu}
@@ -72,9 +81,9 @@ function App() {
         </Modal>
       }
       <Header handleOpenModal={handleOpenModal} />
-      <Quiz selectedIntervals={selectedIntervals}
-        setSelectedIntervals={setSelectedIntervals}
-        speedSelection={speedSelection}
+      <Quiz selectedIntervals={selectedIntervals} setSelectedIntervals={setSelectedIntervals}
+        speedSelection={speedSelection} guessesCorrect={guessesCorrect} setGuessesCorrect={setGuessesCorrect}
+        guessesTotal={guessesTotal} setGuessesTotal={setGuessesTotal}
          />
     </>
   )

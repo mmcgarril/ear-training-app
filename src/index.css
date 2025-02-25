@@ -1,6 +1,7 @@
 :root {
     --main-bg-color: rgb(235, 237, 238);
     --secondary-bg-color: white;
+    --tertiary-bg-color: rgb(64, 64, 64);
     --playback-main-color: rgb(183, 181, 181);
     --playback-new-color: rgb(67, 67, 67);
     --settings-blue: rgb(0, 98, 255);
@@ -14,7 +15,7 @@ html, body {
 }
 
 .header {
-    background-color: rgb(64, 64, 64);
+    background-color: var(--tertiary-bg-color);
     display: flex;
     justify-content: space-between;
 }
@@ -110,6 +111,7 @@ html, body {
 }
 
 .setting-button {
+    position: relative;
     background-color: var(--secondary-bg-color);
     display: flex;
     justify-content: space-between;
@@ -122,7 +124,22 @@ html, body {
 }
 
 .setting-button > i {
-    color: var(--main-bg-color);
+    color: var(--tertiary-bg-color);
+}
+
+.reset {
+    position: absolute;
+    width: 20%;
+    padding: 20px;
+    right: -50%;
+    transition: right 0.5s ease-in-out;
+    background-color: rgb(255, 85, 85);
+    color: white;
+    text-align: center;
+}
+
+.slide-left {
+    right: 0;
 }
 
 .score-container {

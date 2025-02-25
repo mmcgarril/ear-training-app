@@ -3,15 +3,17 @@ import { clipDuration, createPossibleAnswers, intervalSources } from '../utils'
 import { AnswerButton } from './AnswerButton'
 
 export default function Quiz(props) {
-    const { selectedIntervals, setSelectedIntervals, speedSelection } = props
+    const { selectedIntervals, setSelectedIntervals, speedSelection,
+        guessesCorrect, setGuessesCorrect, guessesTotal, setGuessesTotal } = props
+        
     const [ isPlaying, setIsPlaying ] = useState(false)
     const [ startingPitch, setStartingPitch ] = useState(null)
     const [ intAnswer, setIntAnswer ] = useState(null) 
     const [ endingPitch, setEndingPitch ] = useState(null)
-    const [ guessesCorrect, setGuessesCorrect ] = useState(0)
-    const [ guessesTotal, setGuessesTotal ] = useState(0)
     const [ clickedAnsButtons, setClickedAnsButtons ] = useState([])
     const [ isCorrect, setIsCorrect ] = useState(false)
+
+    const percentage = Math.round(guessesCorrect/guessesTotal * 100)
 
     function handlePlayButton() {
         if (isCorrect) { return }
@@ -82,7 +84,7 @@ export default function Quiz(props) {
                 setIsCorrect(false)
                 setClickedAnsButtons([])
                 setSelectedIntervals([...selectedIntervals])
-            }, 1000)
+            }, 1500)
         } else {
             
         }
@@ -114,7 +116,7 @@ export default function Quiz(props) {
                         <div className={`playback-active-line ${isPlaying ? speedSelection : ''}`} />
                     </div>
                 </div>
-                <div className="correct-box">{isCorrect ? 'Correct!' : ''} {startingPitch} {endingPitch} {intAnswer}</div>
+                <div className="correct-box">{isCorrect ? 'Correct!' : ''}</div>
                 <div className="quiz-row right">
                     <AnswerButton value={0}
                         selectedIntervals={selectedIntervals}
@@ -202,7 +204,7 @@ export default function Quiz(props) {
             <div className="score-container">
                 <p>Score:</p>
                 <p>{`${guessesCorrect}/${guessesTotal}`}</p>
-                <p>100%</p>
+                <p>{percentage ? `${percentage}%` : '0%'}</p>
             </div>
         </>
     )
