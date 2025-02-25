@@ -48,22 +48,22 @@ export const intervalInfo = {
 export function createPossibleAnswers(selectedIntGroups) {
     const possibleIndexDistance = []
     if ((selectedIntGroups || []).includes('unison')) {
-        possibleIndexDistance.push(0, 12)
+        possibleIndexDistance.push(0, 12, -12)
     }
     if ((selectedIntGroups || []).includes('seconds')) {
-        possibleIndexDistance.push(1, 2)
+        possibleIndexDistance.push(1, -1, 2, -2)
     }
     if ((selectedIntGroups || []).includes('thirds')) {
-        possibleIndexDistance.push(3, 4)
+        possibleIndexDistance.push(3, -3, 4, -4)
     }
     if ((selectedIntGroups || []).includes('fourths')) {
-        possibleIndexDistance.push(5, 6, 7)
+        possibleIndexDistance.push(5, -5, 6, -6, 7, -7)
     }
     if ((selectedIntGroups || []).includes('sixths')) {
-        possibleIndexDistance.push(8, 9)
+        possibleIndexDistance.push(8, -8, 9, -9)
     }
     if ((selectedIntGroups || []).includes('sevenths')) {
-        possibleIndexDistance.push(10, 11)
+        possibleIndexDistance.push(10, -10, 11, -11)
     }
     
     return possibleIndexDistance

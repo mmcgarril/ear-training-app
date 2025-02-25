@@ -5,13 +5,12 @@ import { AnswerButton } from './AnswerButton'
 export default function Quiz(props) {
     const { selectedIntervals, setSelectedIntervals, speedSelection } = props
     const [ isPlaying, setIsPlaying ] = useState(false)
-    const [ intAnswer, setIntAnswer ] = useState(null) 
     const [ startingPitch, setStartingPitch ] = useState(null)
+    const [ intAnswer, setIntAnswer ] = useState(null) 
     const [ endingPitch, setEndingPitch ] = useState(null)
     const [ guessesCorrect, setGuessesCorrect ] = useState(0)
     const [ guessesTotal, setGuessesTotal ] = useState(0)
     const [ clickedAnsButtons, setClickedAnsButtons ] = useState([])
-    const [ disabledAnsButtons, setDisabledAnsButtons ] = useState([])
     const [ isCorrect, setIsCorrect ] = useState(false)
 
     function handlePlayButton() {
@@ -46,16 +45,25 @@ export default function Quiz(props) {
         }
     }
 
-    function generateNewStartingPitch() {
+    function generateNewPitches() {
         const newStartPitch = Math.floor(Math.random() * intervalSources.length)
-        setStartingPitch(newStartPitch)
-    }
 
-    function generateNewAnswer() {    
-        const possibleAnsArray = createPossibleAnswers(selectedIntervals)   
-        const randomIndex = Math.floor(Math.random() * possibleAnsArray.length)
-        const answer = possibleAnsArray[randomIndex]
-        setIntAnswer(answer)
+        //take selected int groups, create array with all possible intervals up or down, randomly select one
+        const possibleAnsArray = createPossibleAnswers(selectedIntervals)
+            const randomIndex = Math.floor(Math.random() * possibleAnsArray.length)
+            const newAnswer = possibleAnsArray[randomIndex]
+        
+        const newEndingPitch = newStartPitch + newAnswer
+
+        if (newEndingPitch > intervalSources.length -1 || newEndingPitch < 0) {
+            generateNewPitches()
+            return
+        }
+
+        setStartingPitch(newStartPitch)
+        //intAnswer will be positive only
+        setIntAnswer(Math.abs(newAnswer))
+        setEndingPitch(newEndingPitch)
     }
 
     //each guess, update total (and correct) guesses, change button styling and disable, and begin next interval if correct
@@ -82,24 +90,12 @@ export default function Quiz(props) {
     //initialze interval groups to all on page load
     useEffect(() => {
         setSelectedIntervals(['unison', 'seconds', 'thirds', 'fourths', 'sixths', 'sevenths'])
-
     }, [])
 
     //listen for changes to interval groups (on page load and when user interacts with interval menu), create start pitch and answer
     useEffect(() => {
-        generateNewStartingPitch()
-        generateNewAnswer()
+        generateNewPitches()
     }, [selectedIntervals])
-
-    //make sure the ending pitch will not go out of range when start pitch and answer int are assigned
-    useEffect(() => {
-        if ((startingPitch + intAnswer) > (intervalSources.length - 1)) {
-            generateNewStartingPitch()
-            generateNewAnswer()
-        } else {
-            setEndingPitch((startingPitch + intAnswer))
-        }
-    }, [intAnswer])
 
     return (
         <>

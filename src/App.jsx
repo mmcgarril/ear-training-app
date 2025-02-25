@@ -12,7 +12,7 @@ function App() {
   const [ showIntervalMenu, setShowIntervalMenu ] = useState(false)
   const [ selectedIntervals, setSelectedIntervals ] = useState([])
   const [ showSpeedMenu, setShowSpeedMenu ] = useState(false)
-  const [ speedSelection, setSpeedSelection ] = useState('slow')
+  const [ speedSelection, setSpeedSelection ] = useState('medium')
 
   function handleCloseModal() {
     //guard clause to remind user not to leave selected groups empty, leave modal open and set to interval menu
