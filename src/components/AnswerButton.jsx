@@ -6,15 +6,13 @@ export function AnswerButton(props) {
 
     const info = intervalInfo[value]
 
-    const rightAlignInts = [0, 5, 12]
-
     const disabled = !selectedIntervals.includes(info.group)
     const clicked = clickedAnsButtons.includes(value)
 
     return (
         <>
-            <button className={`answer-card ${!clickedAnsButtons.includes(value) ? 'grey-button' : intAnswer == value ? 'green-button' : 'red-button'} 
-                ${rightAlignInts.includes(value) ? 'right' : ''} ${disabled || clicked ? '' : 'active-button'}`} 
+            <button className={`answer-card ${disabled || clicked ? '' : 'active-button'}
+                ${!clickedAnsButtons.includes(value) ? 'grey-button' : intAnswer == value ? 'green-button' : 'red-button'}`} 
                 disabled={disabled || clicked}
                 value={value} onClick={() => handleGuess(value)}>{info.title}</button>
         </>

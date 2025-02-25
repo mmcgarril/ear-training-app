@@ -66,12 +66,13 @@ export default function Quiz(props) {
         setEndingPitch(newEndingPitch)
     }
 
-    //each guess, update total (and correct) guesses, change button styling and disable, and begin next interval if correct
     function handleGuess(btnValue) {
         const prevTotalCount = guessesTotal
         setGuessesTotal(prevTotalCount + 1)
         setClickedAnsButtons([...clickedAnsButtons, btnValue])
 
+        //if guess is correct, set isCorrect to true momentarily to display 'correct-box', stlyle button green
+        //then reset clicked buttons, set selectedInts (which creates a new question)
         if (btnValue == intAnswer) {
             const prevCorrectCount = guessesCorrect
             setGuessesCorrect(prevCorrectCount + 1)
