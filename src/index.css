@@ -243,15 +243,12 @@ html, body {
     font-size: 15px;
     margin: 3px;
     padding: 8px;
+    color: var(--tertiary-bg-color);
 }
 
 .active-button:hover  {
     cursor: pointer;
 }
-
-/* .disabled:hover {
-    cursor: default;
-} */
 
 .empty {
     background: white;
@@ -279,4 +276,10 @@ html, body {
 
 .correct-box {
     height: 24px;
+}
+
+@media (max-width: 600px) {
+    .quiz-container {
+        width: 90%;
+    }
 }
