@@ -142,19 +142,6 @@ html, body {
     right: 0;
 }
 
-.score-container {
-    background-color: var(--secondary-bg-color);
-    margin: auto;
-    width: 300px;
-    margin-top: 20px;
-    border-radius: 8px;
-    padding: 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
-
 .quiz-container {
     background-color: var(--secondary-bg-color);
     margin: auto;
@@ -244,11 +231,19 @@ html, body {
     margin: 3px;
     padding: 8px;
     color: var(--tertiary-bg-color);
-}
-
-.active-button:hover  {
+    background: linear-gradient(to top, var(--main-bg-color), white);
+    border: solid rgb(235, 235, 235) 1px; 
     cursor: pointer;
 }
+
+/* .active-button {
+    background: linear-gradient(to top, var(--main-bg-color), white);
+    border: solid rgb(235, 235, 235) 1px; 
+} */
+
+/* .active-button:hover  {
+    cursor: pointer;
+} */
 
 .empty {
     background: white;
@@ -259,10 +254,10 @@ html, body {
     cursor: auto;
 }
 
-.grey-button {
+/* .grey-button {
     background: linear-gradient(to top, var(--main-bg-color), white);
     border: solid rgb(235, 235, 235) 1px;
-}
+} */
 
 .green-button {
     background: linear-gradient(to top, rgb(122, 231, 122), rgb(196, 229, 196));
@@ -274,12 +269,39 @@ html, body {
     border: solid rgb(255, 144, 144) 1px;
 }
 
+.score-container {
+    background-color: var(--secondary-bg-color);
+    margin: auto;
+    width: 300px;
+    margin-top: 20px;
+    border-radius: 8px;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .correct-box {
     height: 24px;
 }
 
 @media (max-width: 600px) {
+    html, body {
+        background-color: white;
+    }
+    
     .quiz-container {
         width: 90%;
+        margin-top: 0;
+    }
+
+    .playback-line {
+        width: 86%;
+    }
+
+    .score-container {
+        margin-top: 0;
+        padding: 0;
     }
 }

@@ -11,8 +11,8 @@ export function AnswerButton(props) {
 
     return (
         <>
-            <button className={`answer-card ${disabled || clicked ? '' : 'active-button'}
-                ${!clickedAnsButtons.includes(value) ? 'grey-button' : intAnswer == value ? 'green-button' : 'red-button'}`} 
+            <button className={`answer-card ${disabled || clicked ? 'empty' : ''}
+                ${!clickedAnsButtons.includes(value) ? '' : intAnswer == value ? 'green-button' : 'red-button'}`} 
                 disabled={disabled || clicked}
                 value={value} onClick={() => handleGuess(value)}>{info.title}</button>
         </>
