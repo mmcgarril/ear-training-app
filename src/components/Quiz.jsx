@@ -21,8 +21,6 @@ export default function Quiz(props) {
         const audioPlayer2 = document.getElementById('audio2')
         
         if (!isPlaying) {
-            audioPlayer1.load()
-            audioPlayer2.load()
             setIsPlaying(true)
             //play audio1
             audioPlayer1.play()
@@ -103,11 +101,11 @@ export default function Quiz(props) {
     return (
         <>
             <div className="quiz-container">
-                <audio id="audio1" key="1" >
+                <audio id="audio1" key="1" preload="auto">
                     <source src={intervalSources[startingPitch]} />
                 </audio>
                 {/* NEED A KEY PROPERTY IN ORDER FOR AUDIO SRC TO UPDATE!! */}
-                <audio id="audio2" key="2" >
+                <audio id="audio2" key="2" preload="auto">
                     <source src={intervalSources[endingPitch]} />
                 </audio>
                 <div className="playback-container">
