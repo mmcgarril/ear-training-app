@@ -21,9 +21,9 @@ export default function Quiz(props) {
         const audioPlayer2 = document.getElementById('audio2')
         
         if (!isPlaying) {
-            setIsPlaying(true)
             audioPlayer1.load()
             audioPlayer2.load()
+            setIsPlaying(true)
             //play audio1
             audioPlayer1.play()
             //pause and reset audio1 to 0 after clip duration

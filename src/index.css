@@ -236,28 +236,14 @@ html, body {
     cursor: pointer;
 }
 
-/* .active-button {
-    background: linear-gradient(to top, var(--main-bg-color), white);
-    border: solid rgb(235, 235, 235) 1px; 
-} */
-
-/* .active-button:hover  {
-    cursor: pointer;
-} */
-
 .empty {
     background: white;
     color: white;
 }
 
-.empty:hover {
+.empty:hover, .clicked:hover {
     cursor: auto;
 }
-
-/* .grey-button {
-    background: linear-gradient(to top, var(--main-bg-color), white);
-    border: solid rgb(235, 235, 235) 1px;
-} */
 
 .green-button {
     background: linear-gradient(to top, rgb(122, 231, 122), rgb(196, 229, 196));
