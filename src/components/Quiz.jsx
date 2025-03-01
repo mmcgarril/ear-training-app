@@ -23,27 +23,30 @@ export default function Quiz(props) {
         if (!isPlaying) {
             audioPlayer1.load()
             audioPlayer2.load()
-            setIsPlaying(true)
-            //play audio1
-            audioPlayer1.play()
-            //pause and reset audio1 to 0 after clip duration
-            setTimeout(() => {
-                audioPlayer1.pause()
-                audioPlayer1.currentTime = 0
-            }, clipDuration[speedSelection] + 20)
-            //play audio2 after clip duration
-            setTimeout(() => {
-                audioPlayer2.play()
-            }, clipDuration[speedSelection] + 20)
-            //pause and reset audio2 to 0 after twice the clip duration
-            setTimeout(() => {
-                audioPlayer2.pause()
-                audioPlayer2.currentTime = 0
-            }, (clipDuration[speedSelection] * 2) + 40)
-            //reset isPlaying to false after twice the clip duration, plus buffer time to avoid play/pause err
-            setTimeout(() => {
-                setIsPlaying(false)
-            }, (clipDuration[speedSelection] * 2 + 40))
+            //play audio1, execute rest of logic asynchronously
+            audioPlayer1.play().then(() => {
+                setIsPlaying(true)
+                //pause and reset audio1 to 0 after clip duration
+                setTimeout(() => {
+                    audioPlayer1.pause()
+                    audioPlayer1.currentTime = 0
+                }, clipDuration[speedSelection] + 20)
+                //play audio2 after clip duration
+                setTimeout(() => {
+                    audioPlayer2.play()
+                }, clipDuration[speedSelection] + 20)
+                //pause and reset audio2 to 0 after twice the clip duration
+                setTimeout(() => {
+                    audioPlayer2.pause()
+                    audioPlayer2.currentTime = 0
+                }, (clipDuration[speedSelection] * 2) + 40)
+                //reset isPlaying to false after twice the clip duration, plus buffer time to avoid play/pause err
+                setTimeout(() => {
+                    setIsPlaying(false)
+                }, (clipDuration[speedSelection] * 2 + 40))
+            }).catch((err) => {
+                console.log(err.message)
+            })
         }
     }
 
