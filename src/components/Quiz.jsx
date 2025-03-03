@@ -15,14 +15,15 @@ export default function Quiz(props) {
 
     const percentage = Math.round(guessesCorrect/guessesTotal * 100)
 
+    const audioPlayer1 = document.getElementById('audio1')
+    const audioPlayer2 = document.getElementById('audio2')
+
     function handlePlayButton() {
         if (isCorrect) { return }
-        const audioPlayer1 = document.getElementById('audio1')
-        const audioPlayer2 = document.getElementById('audio2')
         
         if (!isPlaying) {
-            audioPlayer1.load()
-            audioPlayer2.load()
+            /* audioPlayer1.load()
+            audioPlayer2.load() */
             //play audio1, execute rest of logic asynchronously
             audioPlayer1.play().then(() => {
                 setIsPlaying(true)
@@ -102,6 +103,13 @@ export default function Quiz(props) {
     useEffect(() => {
         generateNewPitches()
     }, [selectedIntervals])
+
+    useEffect(() => {
+        const audioPlayer1 = document.getElementById('audio1')
+        const audioPlayer2 = document.getElementById('audio2')
+        audioPlayer1.load()
+        audioPlayer2.load()
+    }, [endingPitch])
 
     return (
         <>
