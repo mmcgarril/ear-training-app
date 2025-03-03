@@ -113,8 +113,8 @@ export default function Quiz(props) {
                 <audio id="audio2" key="2" preload="auto">
                     <source src={intervalSources[endingPitch]} />
                 </audio>
-                <div className="playback-container">
-                    <i className="fa-solid fa-play" onClick={handlePlayButton}></i>
+                <div className="playback-container" onClick={handlePlayButton}>
+                    <i className="fa-solid fa-play"></i>
                     <div className="playback-line">
                         <div className={`playback-active-line ${isPlaying ? speedSelection : ''}`} />
                     </div>
