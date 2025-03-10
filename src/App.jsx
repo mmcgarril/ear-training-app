@@ -63,9 +63,9 @@ function App() {
         <Modal handleCloseModal={handleCloseModal}>
           {showSettings &&
             <SettingsMenu title="Settings"
-            handleOpenSpeedMenu={handleOpenSpeedMenu}
-            handleOpenIntervalMenu={handleOpenIntervalMenu} 
-            handleResetScore={handleResetScore} />
+              handleOpenSpeedMenu={handleOpenSpeedMenu}
+              handleOpenIntervalMenu={handleOpenIntervalMenu} 
+              handleResetScore={handleResetScore} />
           }
           {showIntervalMenu &&
             <IntervalMenu handleCloseIntervalMenu={handleCloseIntervaldMenu}
@@ -74,9 +74,9 @@ function App() {
           }
           {showSpeedMenu &&
             <SpeedMenu
-            handleCloseSpeedMenu={handleCloseSpeedMenu} 
-            speedSelection={speedSelection}
-            setSpeedSelection={setSpeedSelection} />
+              handleCloseSpeedMenu={handleCloseSpeedMenu} 
+              speedSelection={speedSelection}
+              setSpeedSelection={setSpeedSelection} />
           }
         </Modal>
       }

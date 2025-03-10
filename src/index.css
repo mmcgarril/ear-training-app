@@ -1,25 +1,40 @@
-:root {
+[data-theme="light"] {
     --main-bg-color: rgb(235, 237, 238);
     --secondary-bg-color: white;
     --tertiary-bg-color: rgb(64, 64, 64);
+    --mobile-bg-color: white;
+    --main-text-color: rgb(64, 64, 64);
+    --header-text-color: rgb(235, 237, 238);
     --playback-main-color: rgb(183, 181, 181);
     --playback-new-color: rgb(67, 67, 67);
     --settings-blue: rgb(0, 98, 255);
+    --main-answer-green: rgb(122, 231, 122);
+    --secondary-answer-green: rgb(196, 229, 196);
+    --main-answer-red: rgb(255, 114, 114);
+    --secondary-answer-red: rgb(255, 193, 193);
 }
 
 [data-theme="dark"] {
     --main-bg-color: rgb(64, 64, 64);
-    --secondary-bg-color: black;
-    --tertiary-bg-color: rgb(91, 90, 90);
+    --secondary-bg-color: rgb(23, 23, 23);
+    --tertiary-bg-color: rgb(64, 64, 64);
+    --mobile-bg-color: rgb(23, 23, 23);
+    --main-text-color: rgb(237, 237, 237);
+    --header-text-color: rgb(235, 237, 238);
     --playback-main-color: rgb(183, 181, 181);
     --playback-new-color: rgb(227, 227, 227);
     --settings-blue: rgb(4, 94, 239);
+    --main-answer-green: rgb(25, 137, 25);
+    --secondary-answer-green: rgb(36, 173, 36);
+    --main-answer-red: rgb(158, 25, 25);
+    --secondary-answer-red: rgb(224, 31, 31);
 }
 
 html, body {
     margin: 0;
     padding: 0;
     background-color: var(--main-bg-color);
+    color: var(--main-text-color);
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -27,16 +42,73 @@ html, body {
     background-color: var(--tertiary-bg-color);
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    color: var(--header-text-color);
+    padding-left: 15px;
+    padding-right: 15px;
 }
- .header > p {
-    color: white;
- }
 
 .header > i {
-    color: rgb(251, 251, 251);
+    color: var(--header-text-color);
     font-size: 22px;
-    padding: 15px;
 }
+
+.dark-mode > p {
+    font-size: 10px;
+    margin: 0;
+}
+
+/* Resized for 40px width */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px; /* Toggle width */
+    height: 20px; /* Toggle height (half of width for a nice ratio) */
+  }
+  
+  /* Hide default checkbox */
+  .toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* Slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 20px; /* Same as height for full rounded edges */
+    transition: 0.4s;
+  }
+  
+  /* The moving circle */
+  .slider::before {
+    content: "";
+    position: absolute;
+    height: 16px; /* Slightly smaller than the height */
+    width: 16px;
+    left: 2px; /* Small padding */
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+  }
+  
+  /* When checkbox is checked */
+  .toggle-switch input:checked + .slider {
+    background-color: var(--settings-blue);
+  }
+  
+  .toggle-switch input:checked + .slider::before {
+    transform: translateX(20px); /* Move right by half of the width */
+  }
+  
+  
 
 .modal-container {
     position: fixed;
@@ -168,7 +240,7 @@ html, body {
     box-sizing: border-box;
     padding: 30px;
     margin-bottom: 10px;;
-    background: linear-gradient(to bottom, var(--main-bg-color), white);
+    background: linear-gradient(to bottom, var(--main-bg-color), var(--secondary-bg-color));
     border-radius: 8px;
     border: solid rgb(195, 195, 195) 1px;
     display: flex;
@@ -177,7 +249,7 @@ html, body {
 }
 
 .playback-container > i {
-    color: var(--tertiary-bg-color);
+    color: var(--main-text-color);
     font-size: 20px;
 }
 
@@ -239,15 +311,15 @@ html, body {
     font-size: 15px;
     margin: 3px;
     padding: 8px;
-    color: var(--tertiary-bg-color);
-    background: linear-gradient(to top, var(--main-bg-color), white);
+    color: var(--main-text-color);
+    background: linear-gradient(to top, var(--main-bg-color), var(--secondary-bg-color));
     border: solid rgb(235, 235, 235) 1px; 
     cursor: pointer;
 }
 
 .empty {
-    background: white;
-    color: white;
+    background: var(--secondary-bg-color);
+    color: var(--secondary-bg-color);
 }
 
 .empty:hover, .clicked:hover {
@@ -255,12 +327,12 @@ html, body {
 }
 
 .green-button {
-    background: linear-gradient(to top, rgb(122, 231, 122), rgb(196, 229, 196));
+    background: linear-gradient(to top, var(--main-answer-green), var(--secondary-answer-green));
     border: solid rgb(150, 193, 150) 1px;
 }
 
 .red-button {
-    background: linear-gradient(to top, rgb(255, 114, 114), rgb(255, 193, 193));
+    background: linear-gradient(to top, var(--main-answer-red), var(--secondary-answer-red));
     border: solid rgb(255, 144, 144) 1px;
 }
 
@@ -283,7 +355,7 @@ html, body {
 
 @media (max-width: 600px) {
     html, body {
-        background-color: white;
+        background-color: var(--secondary-bg-color);
     }
     
     .quiz-container {
@@ -302,5 +374,9 @@ html, body {
     .score-container {
         margin-top: 0;
         padding: 0;
+    }
+
+    .settings-container {
+        width: 65%;
     }
 }
